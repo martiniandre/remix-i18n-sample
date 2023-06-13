@@ -1,41 +1,44 @@
-# Welcome to Remix!
+## What is this?
 
-- [Remix Docs](https://remix.run/docs)
+This is a simple example of how to use [remix-i18next](https://github.com/sergiodxa/remix-i18next) with [Remix](https://remix.run)
 
-## Fly Setup
+## For more info...
 
-1. [Install `flyctl`](https://fly.io/docs/getting-started/installing-flyctl/)
+You may have arrived here from the [Remix](https://github.com/remix-run/remix) repository, or the [react-i18next](https://github.com/i18next/react-i18next/) repository. Either way, for more documentation, please visit the [main README](https://github.com/sergiodxa/remix-i18next).
 
-2. Sign up and log in to Fly
+## Configuration
 
-```sh
-flyctl auth signup
+The i18n project requires certain configurations to function correctly. Here are the main configuration options and how to set them up:
+
+1. **Supported Languages**:
+   In the configuration file <code> **app/i18n/index.ts** </code> define the list of supported languages and their respective language codes. For example:
+
+   <code>supportedLngs: ["en", "pt", "fr", "es"]</code>
+   <br>
+
+2. **Translation Files**:
+   Create language-specific translation files for each supported language. These files should be created in the `public/i18n/locales/{{lang}}` directory and contain key-value pairs for translated strings. For example:
+
+- `public/i18n/locales/en/common.json`:
+
+```
+  {
+    "greeting": "Hello!!",
+  }
 ```
 
-3. Setup Fly. It might ask if you want to deploy, say no since you haven't built the app yet.
+- `public/i18n/locales/fr/common.json`:
 
-```sh
-flyctl launch
+```
+{
+  "greeting": "Salut!!",
+}
 ```
 
 ## Development
 
-From your terminal:
+Now, you can use i18n in your project. Import the useTranslation hook from react-i18next and if your namespace (NS) is not configured as "common", you must pass it as an argument to the useTranslation function.
 
-```sh
-npm run dev
-```
+<code>let { i18n, t } = useTranslation('index');</code>
 
-This starts your app in development mode, rebuilding assets on file changes.
-
-## Deployment
-
-If you've followed the setup instructions already, all you need to do is run this:
-
-```sh
-npm run deploy
-```
-
-You can run `flyctl info` to get the url and ip address of your server.
-
-Check out the [fly docs](https://fly.io/docs/getting-started/node/) for more information.
+In this example, the useTranslation hook is called with the namespace argument set to 'index'. This allows the component to access the current language to the 'index' namespace, retrieving the translations from the `public/i18n/locales/en/index.json` path
