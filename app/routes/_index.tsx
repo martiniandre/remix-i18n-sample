@@ -6,7 +6,7 @@ export let handle = {
 };
 
 export default function Index() {
-  let { i18n, t } = useTranslation('common');
+  const { i18n, t } = useTranslation('common');
 
   const changeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
